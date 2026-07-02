@@ -26,13 +26,12 @@ jobs:
           repo = 'https://github.com/itsredbluepurple/RedBluePurple'
           s = s.replace('<a href="options.html">SETTINGS</a>', f'<a href="{repo}">GITHUB</a>')
           s = s.replace('<a href="options.html">Settings</a>', f'<a href="{repo}">GitHub</a>')
-          s = s.replace('<button class="btn cta" data-magnetic>Get started <span class="arr">→</span></button>',
-                        f'<a class="btn cta" data-magnetic href="{repo}">Get started <span class="arr">→</span></a>')
-          s = s.replace('<button class="btn cta2" data-magnetic><span class="pl"><svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 0l8 5-8 5z"/></svg></span>Watch the tour</button>',
-                        f'<a class="btn cta2" data-magnetic href="{repo}#red-blue-purple"><span class="pl"><svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 0l8 5-8 5z"/></svg></span>Watch the demo</a>')
+          # Remaining settings CTAs make no sense on the web — point them at the repo.
+          s = s.replace('href="options.html">Open settings ', f'href="{repo}">Get the extension ')
+          s = s.replace('href="options.html">Get started ', f'href="{repo}">Get started ')
+          assert 'options.html' not in s, 'extension-internal link leaked to the website'
           s = s.replace('href="/fonts.css"', 'href="./fonts.css"')
           s = s.replace('src="/about.js"', 'src="./about.js"')
-          s = s.replace('</head>', '<style>a.btn{text-decoration:none;display:inline-flex;align-items:center;gap:10px}</style></head>')
           open('_site/index.html', 'w').write(s)
           print('site built')
           EOF
