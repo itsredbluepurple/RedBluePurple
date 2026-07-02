@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/>
+<title>Red Blue Purple · Settings</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%235fe0ff'/%3E%3Cstop offset='0.45' stop-color='%234d9bff'/%3E%3Cstop offset='1' stop-color='%23b07bff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%2306070e'/%3E%3Ctext x='6' y='44' font-family='Space Grotesk,Arial,sans-serif' font-weight='700' font-size='30' fill='%23ff4d6d'%3ER%3C/text%3E%3Ctext x='25' y='44' font-family='Space Grotesk,Arial,sans-serif' font-weight='700' font-size='30' fill='url(%23g)'%3EBP%3C/text%3E%3C/svg%3E"/>
+<meta name="manifest.open_in_tab" content="true">
+<link rel="stylesheet" href="/fonts.css">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<canvas id="gl"></canvas>
+<div class="legib"></div>
+<div class="wrap">
+  <header class="top">
+    <div class="mark"><span class="r">Red</span><span class="bp">Blue&nbsp;Purple</span></div>
+    <nav class="nav"><a href="about.html#overview">OVERVIEW</a><a href="about.html#how">HOW IT WORKS</a><a href="options.html" class="act">SETTINGS</a></nav>
+  </header>
+
+  <main class="shell">
+    <div class="r-anim" id="hd">
+      <div class="kicker">Your criteria</div>
+      <h1>Describe what you're <span class="b">looking for</span>.</h1>
+      <p class="lede">Write your criteria in plain English — companies worth your time and the deal-breakers to skip. The scanner judges every listing against this prompt.</p>
+    </div>
+
+    <div class="grid" style="grid-template-columns:1fr">
+      <section class="card r-anim">
+        <div class="chead"><span class="lbl">Your criteria</span><span class="hint">one prompt, plain English</span></div>
+        <p class="cnote">Describe the companies worth your time and the dealbreakers to avoid. Every listing gets a badge: Aligned, Mixed, Flagged — or Neutral when nothing notable applies. The deep-research card re-checks any badge you click.</p>
+        <textarea id="prompt" rows="6" spellcheck="true"
+          placeholder="e.g. Mid-size or larger B2B software companies, ideally growing or recently funded. Avoid: staffing agencies, companies with recent layoffs, or a reputation for bad work-life balance."></textarea>
+        <div class="grp"><div class="gl">Anthropic API key <span id="keystatus" class="keystatus"></span></div>
+          <div class="addrow">
+            <input type="password" id="apikey" placeholder="sk-ant-…" autocomplete="off" spellcheck="false"/>
+            <button class="add" id="keyshow" type="button">Show</button>
+            <button class="add" id="keysave" type="button">Save key</button>
+          </div>
+          <p class="cnote">Stored only in this browser. Used for the on-page scan and deep research.
+            <a id="getkey" href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">Get a key →</a></p>
+        </div>
+      </section>
+    </div>
+
+    <div class="savebar">
+      <span class="saved"><i></i>Changes saved automatically</span>
+      <button class="reset">Reset to defaults</button>
+    </div>
+  </main>
+</div>
+
+<div id="cring"></div><div id="cdot"></div>
+
+<script type="module" src="./main.ts"></script>
+</body></html>

@@ -1,0 +1,124 @@
+/* ================= RBP injected badge ================= */
+.rbp-badge{display:inline-flex;align-items:center;gap:6px;vertical-align:middle;margin-left:10px;
+  font-family:"JetBrains Mono",ui-monospace,monospace;font-weight:700;font-size:11px;letter-spacing:.09em;
+  text-transform:uppercase;color:#fff;padding:4px 11px 4px 9px;border-radius:8px;line-height:1;
+  position:relative;white-space:nowrap;cursor:pointer;transform:translateZ(0);
+  transition:opacity .3s ease,transform .3s cubic-bezier(.2,1,.3,1),filter .3s ease,box-shadow .3s ease}
+.rbp-badge .dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.95);box-shadow:0 0 8px rgba(255,255,255,.85)}
+.rbp-badge .lbl{transform:translateY(.5px)}
+
+.rbp-badge.aligned{background:linear-gradient(120deg,#2f63ff,#4d9bff);box-shadow:0 3px 12px rgba(45,110,255,.5),0 0 0 1px rgba(40,90,230,.35) inset}
+.rbp-badge.flagged{background:linear-gradient(120deg,#ff2d51,#ff5a78);box-shadow:0 3px 12px rgba(255,55,92,.5),0 0 0 1px rgba(220,30,60,.35) inset}
+.rbp-badge.mixed{background:linear-gradient(120deg,#6f43ff,#a877ff);box-shadow:0 3px 12px rgba(123,80,255,.5),0 0 0 1px rgba(100,60,230,.35) inset}
+.rbp-badge.neutral{background:#e9ebf0;color:#5b6474;box-shadow:0 0 0 1px rgba(70,80,110,.14) inset}
+.rbp-badge.neutral .dot{background:#9aa3b5;box-shadow:none}
+.rbp-badge.neutral.sel{--g1:#8b94a6;--g2:#b6bdcb;--g3:#eef0f5;--glow:rgba(140,150,170,.4)}
+
+.rbp-badge.scanning{background:#e4e7ec;color:#8b94a6;box-shadow:0 1px 4px rgba(40,50,80,.12) inset;cursor:default}
+.rbp-badge.scanning .dot{background:#aab3c4;box-shadow:none;animation:rbp-pulse 1.05s ease-in-out infinite}
+.rbp-badge.scanning::after{content:"";position:absolute;inset:0;border-radius:8px;
+  background:linear-gradient(100deg,transparent 20%,rgba(255,255,255,.65) 50%,transparent 80%);background-size:200% 100%;
+  animation:rbp-sweep 1.25s linear infinite;pointer-events:none}
+@keyframes rbp-pulse{0%,100%{opacity:.35}50%{opacity:1}}
+@keyframes rbp-sweep{0%{background-position:140% 0}100%{background-position:-40% 0}}
+.rbp-badge.pop{animation:rbp-pop .42s cubic-bezier(.18,1.2,.4,1)}
+@keyframes rbp-pop{0%{transform:scale(.82)}60%{transform:scale(1.06)}100%{transform:scale(1)}}
+
+/* ---- FOCUS / click-through cursor ---- */
+/* One coherent focus language across all verdicts — a masked rotating gradient
+   border + a slow ambient glow + a clean lift, tinted per color. Only ever one
+   badge is selected, so it can be rich at zero scale cost. (Linear/Stripe "aurora border".) */
+@property --rbpA{syntax:'<angle>';initial-value:0deg;inherits:false}
+
+body.rbp-focusing .rbp-badge:not(.sel){opacity:.3;filter:saturate(.55)}
+
+.rbp-badge.sel{transform:scale(1.1);z-index:6;box-shadow:0 8px 24px -8px rgba(18,24,52,.5)}
+.rbp-badge.aligned.sel{--g1:#3b74ff;--g2:#5fe0ff;--g3:#eafdff;--glow:rgba(95,224,255,.55)}
+.rbp-badge.mixed.sel  {--g1:#6f43ff;--g2:#b07bff;--g3:#ecdcff;--glow:rgba(176,123,255,.5)}
+.rbp-badge.flagged.sel{--g1:#ff2d51;--g2:#ff6f86;--g3:#ffd9df;--glow:rgba(255,80,110,.5)}
+
+/* crisp rotating gradient border (masked to a 2px ring) */
+.rbp-badge.sel::before{content:"";position:absolute;inset:-2.5px;border-radius:10px;padding:2px;z-index:-1;pointer-events:none;
+  background:conic-gradient(from var(--rbpA),var(--g1),var(--g2),var(--g3),var(--g2),var(--g1));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
+  mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;
+  animation:rbp-spin 3.2s linear infinite}
+@keyframes rbp-spin{to{--rbpA:360deg}}
+
+/* soft ambient glow, slow breathe */
+.rbp-badge.sel::after{content:"";position:absolute;inset:-10px;border-radius:16px;z-index:-2;pointer-events:none;
+  background:radial-gradient(closest-side,var(--glow),transparent 74%);filter:blur(5px);animation:rbp-breathe 2.8s ease-in-out infinite}
+@keyframes rbp-breathe{0%,100%{opacity:.5}50%{opacity:.92}}
+
+/* ---- floating navigator (the click-through control) ---- */
+.rbp-nav{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:60;display:flex;align-items:center;gap:6px;
+  background:rgba(10,13,22,.92);border:1px solid rgba(140,170,255,.18);border-radius:14px;padding:8px 10px;
+  box-shadow:0 16px 44px -14px rgba(0,0,0,.6);backdrop-filter:blur(10px);font-family:"JetBrains Mono",monospace}
+.rbp-nav .pos{color:#cdd6ee;font-size:11.5px;letter-spacing:.04em;padding:0 8px;min-width:96px;text-align:center}
+.rbp-nav .pos b{color:#fff}
+.rbp-nav button{border:1px solid rgba(140,170,255,.16);background:rgba(30,38,60,.6);color:#cdd6ee;border-radius:9px;
+  height:30px;min-width:30px;padding:0 9px;font-family:inherit;font-size:11px;font-weight:600;letter-spacing:.05em;cursor:pointer;text-transform:uppercase}
+.rbp-nav button:hover{border-color:rgba(95,224,255,.45);color:#fff}
+.rbp-nav .sep{width:1px;height:20px;background:rgba(140,170,255,.16);margin:0 3px}
+.rbp-nav .filt{transition:background .15s,border-color .15s,color .15s,opacity .15s}
+.rbp-nav .filt.b:hover{border-color:rgba(77,155,255,.7)} .rbp-nav .filt.r:hover{border-color:rgba(255,77,109,.7)} .rbp-nav .filt.p:hover{border-color:rgba(176,123,255,.7)} .rbp-nav .filt.n:hover{border-color:rgba(154,163,181,.7)}
+.rbp-nav .filt .d{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px;transform:translateY(.5px)}
+.rbp-nav .filt.b .d{background:#4d9bff} .rbp-nav .filt.r .d{background:#ff4d6d} .rbp-nav .filt.p .d{background:#b07bff} .rbp-nav .filt.n .d{background:#9aa3b5}
+/* off = muted; on = tinted fill + colored border + bright text */
+.rbp-nav .filt:not(.on){opacity:.45} .rbp-nav .filt:not(.on) .d{opacity:.5}
+.rbp-nav .filt.b.on{background:rgba(77,155,255,.2);border-color:rgba(77,155,255,.75);color:#dcecff}
+.rbp-nav .filt.p.on{background:rgba(176,123,255,.2);border-color:rgba(176,123,255,.75);color:#efe4ff}
+.rbp-nav .filt.r.on{background:rgba(255,77,109,.2);border-color:rgba(255,77,109,.75);color:#ffdbe1}
+.rbp-nav .filt.n.on{background:rgba(154,163,181,.2);border-color:rgba(154,163,181,.75);color:#e3e6ec}
+
+/* ---- deep-research verdict card (opens on second badge click) ---- */
+/* Ported from badge.html .rbp-card; adapted to the .rbp-deep class namespace. */
+.rbp-deep{margin:14px 0 2px;border-radius:14px;overflow:hidden;position:relative;
+  background:radial-gradient(120% 140% at 12% -10%,#1a2034,#0b0e18 60%);
+  border:1px solid rgba(140,170,255,.14);box-shadow:0 18px 50px -18px rgba(0,0,0,.55);
+  color:#eaf0fb;font-family:"Inter",-apple-system,system-ui,sans-serif}
+
+/* loading shimmer */
+.rbp-deep.loading .rbp-deep-body{padding:20px 18px;font-size:13px;color:#7d88a6;
+  font-family:"JetBrains Mono",monospace;letter-spacing:.06em;text-transform:uppercase}
+
+.rbp-deep-head{display:flex;align-items:center;gap:12px;padding:16px 18px 12px;position:relative}
+.rbp-deep-head b{font-family:"Space Grotesk","Inter",sans-serif;font-weight:600;font-size:17px;letter-spacing:-.01em;color:#eaf0fb}
+.rbp-deep-head button[data-close]{margin-left:auto;background:none;border:none;color:#7d88a6;font-size:18px;
+  cursor:pointer;line-height:1;padding:0 2px}
+.rbp-deep-head button[data-close]:hover{color:#cdd6ee}
+
+.rbp-deep-cols{padding:4px 18px 18px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.rbp-deep-cols .why h4{margin:0 0 8px;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.09em;
+  text-transform:uppercase;font-weight:600}
+.rbp-deep-cols .why.pro h4{color:#4d9bff}
+.rbp-deep-cols .why.con h4{color:#ff4d6d}
+.rbp-deep-cols ul{margin:0;padding:0;list-style:none}
+.rbp-deep-cols li{font-size:13.5px;line-height:1.4;margin:5px 0;color:#cdd6ee}
+.rbp-deep-cols .why.pro li::before{content:"✓ ";color:#7fb0ff;font-weight:700}
+.rbp-deep-cols .why.con li::before{content:"✕ ";color:#ff8198;font-weight:700}
+
+.rbp-deep-chip{display:inline-flex;align-items:center;margin-left:8px;padding:2px 8px;border-radius:6px;font-size:11px;font-weight:700;color:#fff}
+.rbp-deep-chip.aligned{background:linear-gradient(120deg,#2f63ff,#4d9bff)}
+.rbp-deep-chip.flagged{background:linear-gradient(120deg,#ff2d51,#ff5a78)}
+.rbp-deep-chip.mixed{background:linear-gradient(120deg,#6f43ff,#a877ff)}
+.rbp-deep-chip.neutral{background:#e9ebf0;color:#5b6474}
+
+.rbp-deep-foot{border-top:1px solid rgba(140,170,255,.1);padding:12px 18px;display:flex;align-items:center;
+  flex-wrap:wrap;gap:10px 14px;position:relative;font-size:12.5px;color:#9aa6c4}
+.rbp-deep-foot em{margin-left:auto;font-style:normal;font-family:"JetBrains Mono",monospace;
+  font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:#5fe0ff}
+.rbp-deep-foot em::before{content:"● ";font-size:7px;vertical-align:middle}
+
+/* ---- nudge: no-key prompt + real scan-failure surfacing (light-DOM pill) ---- */
+.rbp-nudge{position:fixed;left:50%;bottom:72px;transform:translateX(-50%);z-index:61;display:flex;align-items:center;gap:10px;
+  max-width:min(92vw,560px);background:rgba(10,13,22,.95);border:1px solid rgba(140,170,255,.22);border-radius:12px;padding:10px 12px;
+  box-shadow:0 16px 44px -14px rgba(0,0,0,.6);backdrop-filter:blur(10px);
+  font-family:"Inter",system-ui,-apple-system,sans-serif;font-size:13px;color:#dbe2f5;line-height:1.35}
+.rbp-nudge .rbp-nudge-text{flex:1}
+.rbp-nudge .rbp-nudge-btn{flex:none;border:1px solid rgba(95,224,255,.5);background:rgba(77,155,255,.18);color:#dcecff;
+  border-radius:8px;height:28px;padding:0 12px;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
+.rbp-nudge .rbp-nudge-btn:hover{background:rgba(77,155,255,.3);border-color:rgba(95,224,255,.8)}
+.rbp-nudge .rbp-nudge-x{flex:none;border:0;background:transparent;color:#9aa6c4;font-size:18px;line-height:1;cursor:pointer;
+  padding:0;width:22px;height:22px;border-radius:6px}
+.rbp-nudge .rbp-nudge-x:hover{color:#fff;background:rgba(255,255,255,.1)}

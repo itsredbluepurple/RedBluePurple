@@ -1,0 +1,142 @@
+:root {
+  --bg: #06070e;
+  --blue: #4d9bff;
+  --purple: #b07bff;
+  --red: #ff4d6d;
+  --ink: #eaf0fb;
+  --sub: #9aa6c4;
+  --border: rgba(140, 170, 255, 0.18);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 260px;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 13px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Brand mark */
+.mark {
+  font-family: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+.mark .r {
+  background: linear-gradient(100deg, var(--purple), var(--red));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.mark .bp {
+  background: linear-gradient(100deg, var(--blue), var(--purple));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Tally panel */
+.tally {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 60px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: ui-monospace, "JetBrains Mono", "Cascadia Code", "SF Mono", Menlo, monospace;
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.row .d {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.row .lbl {
+  flex: 1;
+  color: var(--sub);
+  text-transform: uppercase;
+  font-size: 10.5px;
+  letter-spacing: 0.07em;
+}
+
+.row b {
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1;
+}
+
+/* Verdict colour dots */
+.row.b .d { background: var(--blue); box-shadow: 0 0 6px rgba(77, 155, 255, 0.6); }
+.row.p .d { background: var(--purple); box-shadow: 0 0 6px rgba(176, 123, 255, 0.6); }
+.row.r .d { background: var(--red); box-shadow: 0 0 6px rgba(255, 77, 109, 0.6); }
+.row.n .d { background: #9aa3b5; box-shadow: 0 0 6px rgba(154, 163, 181, 0.6); }
+
+/* Scanning hint */
+.scanning {
+  font-family: ui-monospace, "JetBrains Mono", "Cascadia Code", "SF Mono", Menlo, monospace;
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--sub);
+  text-transform: uppercase;
+  padding-top: 4px;
+  border-top: 1px solid var(--border);
+}
+
+/* Empty state */
+.empty {
+  color: var(--sub);
+  font-size: 11.5px;
+  line-height: 1.5;
+  text-align: center;
+  padding: 6px 0;
+}
+
+/* Settings button */
+.opts {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--sub);
+  font-family: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  text-align: center;
+}
+
+.opts:hover {
+  border-color: rgba(77, 155, 255, 0.5);
+  color: var(--ink);
+  background: rgba(77, 155, 255, 0.08);
+}

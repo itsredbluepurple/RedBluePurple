@@ -1,0 +1,69 @@
+venv/
+__pycache__/
+*.pyc
+.env
+config.json
+output/*.md
+build/
+dist/
+*.spec
+
+# Node / extension build
+node_modules/
+.output/
+.wxt/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+
+# Scratch / recordings
+*.webm
+
+# Personal data — never commit (externalized per project rules)
+config/*
+!config/*.example.*
+cache/
+
+# Large archives / screenshots (bloat)
+*.zip
+Screenshot_*.png
+
+# Local Claude Code settings
+.claude/settings.local.json
+
+# SDD scratch (ledger)
+.superpowers/
+
+# Local API key — never commit
+.key
+
+# E2E live-demo output (videos, profile)
+tests/e2e/out/
+
+# Sibling pywebview desktop app (separate project sharing this directory — not part of the extension repo)
+app.py
+backend.py
+paths.py
+build.sh
+requirements*.txt
+config.example.json
+.env.example
+eyeseek_hotkey.py
+eyeseek.user.js
+settings.html
+splash5.html
+badge.html
+badge-focus.html
+ui/
+V1/
+skills/
+*.py
+output/
+
+# Internal engineering process docs (specs/plans) — not part of the public repo
+docs/superpowers/
+
+# Local Claude Code project config
+.claude/
