@@ -1,0 +1,48 @@
+name: Deploy site
+on:
+  push: { branches: [master] }
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency: { group: pages, cancel-in-progress: true }
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # The extension's splash page doubles as the website. Derive the web copy:
+      # extension-internal links become GitHub links, absolute asset paths become
+      # relative so the site works both at a project subpath and a custom domain.
+      - name: Build site from the splash page
+        run: |
+          mkdir -p _site/fonts
+          cp public/about.js _site/about.js
+          cp public/fonts/*.woff2 _site/fonts/
+          sed 's|url("/fonts/|url("./fonts/|g' public/fonts.css > _site/fonts.css
+          python3 - <<'EOF'
+          s = open('public/about.html').read()
+          repo = 'https://github.com/itsredbluepurple/RedBluePurple'
+          s = s.replace('<a href="options.html">SETTINGS</a>', f'<a href="{repo}">GITHUB</a>')
+          s = s.replace('<a href="options.html">Settings</a>', f'<a href="{repo}">GitHub</a>')
+          s = s.replace('<button class="btn cta" data-magnetic>Get started <span class="arr">→</span></button>',
+                        f'<a class="btn cta" data-magnetic href="{repo}">Get started <span class="arr">→</span></a>')
+          s = s.replace('<button class="btn cta2" data-magnetic><span class="pl"><svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 0l8 5-8 5z"/></svg></span>Watch the tour</button>',
+                        f'<a class="btn cta2" data-magnetic href="{repo}#red-blue-purple"><span class="pl"><svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 0l8 5-8 5z"/></svg></span>Watch the demo</a>')
+          s = s.replace('href="/fonts.css"', 'href="./fonts.css"')
+          s = s.replace('src="/about.js"', 'src="./about.js"')
+          s = s.replace('</head>', '<style>a.btn{text-decoration:none;display:inline-flex;align-items:center;gap:10px}</style></head>')
+          open('_site/index.html', 'w').write(s)
+          print('site built')
+          EOF
+      - uses: actions/upload-pages-artifact@v3
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
