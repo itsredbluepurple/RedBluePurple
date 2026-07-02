@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Privacy Policy — Red Blue Purple</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%235fe0ff'/%3E%3Cstop offset='0.45' stop-color='%234d9bff'/%3E%3Cstop offset='1' stop-color='%23b07bff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%2306070e'/%3E%3Ctext x='6' y='44' font-family='Space Grotesk,Arial,sans-serif' font-weight='700' font-size='30' fill='%23ff4d6d'%3ER%3C/text%3E%3Ctext x='25' y='44' font-family='Space Grotesk,Arial,sans-serif' font-weight='700' font-size='30' fill='url(%23g)'%3EBP%3C/text%3E%3C/svg%3E"/>
+<link rel="stylesheet" href="./fonts.css">
+<style>
+  :root{--blue:#4d9bff;--red:#ff4d6d;--purple:#b07bff;--ink:#eaf0fb;--sub:#9aa6c4;}
+  *{box-sizing:border-box}
+  body{margin:0;background:#06070e;color:var(--ink);font-family:"Inter",system-ui,sans-serif;line-height:1.65}
+  .top{display:flex;align-items:center;justify-content:space-between;padding:18px 48px;
+    border-bottom:1px solid rgba(140,170,255,.06)}
+  .mark{display:flex;align-items:center;gap:.32em;font-family:"Space Grotesk";font-weight:700;font-size:20px;
+    letter-spacing:-.01em;text-decoration:none}
+  .mark .r{background:linear-gradient(100deg,var(--purple),var(--red));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .mark .bp{background:linear-gradient(100deg,var(--blue),var(--purple));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .nav{font-family:"JetBrains Mono";font-size:12px}
+  .nav a{color:var(--sub);text-decoration:none;padding:8px 14px;border-radius:9px;letter-spacing:.02em}
+  .nav a:hover{color:var(--ink);background:rgba(120,160,240,.08)}
+  main{max-width:720px;margin:0 auto;padding:56px 24px 96px}
+  .kicker{font-family:"JetBrains Mono";font-size:12px;letter-spacing:.22em;color:var(--sub);text-transform:uppercase}
+  h1{font-family:"Space Grotesk";font-weight:700;font-size:clamp(30px,4.5vw,44px);letter-spacing:-.025em;margin:10px 0 6px}
+  .date{color:var(--sub);font-size:14px;margin-bottom:40px}
+  h2{font-family:"Space Grotesk";font-weight:500;font-size:21px;letter-spacing:-.01em;margin:44px 0 10px}
+  p,li{color:#c3cce2}
+  p,ul{margin:0 0 14px}
+  li{margin-bottom:8px}
+  a{color:var(--blue)}
+  .card{border:1px solid rgba(140,170,255,.14);border-radius:14px;padding:18px 22px;margin:18px 0;
+    background:linear-gradient(180deg,rgba(20,26,46,.5),rgba(12,16,30,.4))}
+  .card p{margin:0;color:var(--ink)}
+  code{font-family:"JetBrains Mono";font-size:.9em;background:rgba(120,160,240,.1);padding:2px 6px;border-radius:6px}
+</style></head>
+<body>
+<div class="top">
+  <a class="mark" href="./index.html"><span class="r">Red</span><span class="bp">Blue Purple</span></a>
+  <nav class="nav"><a href="./index.html">HOME</a><a href="https://github.com/itsredbluepurple/RedBluePurple">GITHUB</a></nav>
+</div>
+<main>
+  <div class="kicker">Privacy Policy</div>
+  <h1>Your data stays in your browser.</h1>
+  <p class="date">Effective July 2, 2026</p>
+
+  <div class="card"><p>Red Blue Purple has no backend, no analytics, and no tracking.
+  The developer never receives, sees, or stores any of your data. The only network
+  requests the extension makes are to Anthropic's API, using your own API key.</p></div>
+
+  <h2>What the extension handles, and where it goes</h2>
+  <ul>
+    <li><b>Your criteria prompt.</b> Stored locally in your browser's extension storage.
+      It is included with scan requests sent to Anthropic so listings can be judged against it.</li>
+    <li><b>Your Anthropic API key.</b> You supply your own key. It is stored locally in your
+      browser's extension storage and sent only to <code>api.anthropic.com</code> as the
+      authorization header on requests you trigger. It is never sent anywhere else.</li>
+    <li><b>Job listing text.</b> When you browse a supported job board (indeed.com or
+      glassdoor.com), the visible listing text on the page is sent to
+      <code>api.anthropic.com</code> so it can be judged against your prompt. When you click
+      a badge for deep research, the listing's company name and details are sent the same way.</li>
+    <li><b>Verdict cache.</b> Verdicts are cached locally in your browser (24-hour lifetime,
+      capped size) so paging through results doesn't repeat requests. Changing your prompt
+      clears it.</li>
+  </ul>
+
+  <h2>What the extension does not do</h2>
+  <ul>
+    <li>No data is ever sent to the developer or any server other than <code>api.anthropic.com</code>.</li>
+    <li>No analytics, telemetry, cookies, fingerprinting, or tracking of any kind.</li>
+    <li>No browsing history is collected. The extension only reads pages on the two supported
+      job boards, and only to badge the listings you're looking at.</li>
+    <li>No data is sold or shared with third parties, used for advertising, or used to
+      determine creditworthiness or for lending purposes.</li>
+  </ul>
+
+  <h2>Third-party processing</h2>
+  <p>Listing text and your prompt are processed by Anthropic to produce verdicts, under your
+  own API account. See the <a href="https://www.anthropic.com/legal/privacy">Anthropic Privacy
+  Policy</a> and their <a href="https://www.anthropic.com/legal/commercial-terms">Commercial
+  Terms</a> for how API inputs are handled.</p>
+
+  <h2>Retention and deletion</h2>
+  <p>Everything the extension stores lives in your browser's local extension storage. You can
+  clear it at any time from the extension's settings, and uninstalling the extension removes
+  all of it. The developer has nothing to delete, because the developer holds nothing.</p>
+
+  <h2>Changes</h2>
+  <p>If this policy changes, the updated version will be posted at this address with a new
+  effective date.</p>
+
+  <h2>Contact</h2>
+  <p>Questions about this policy: <a href="mailto:redbluepurplesupport@gmail.com">redbluepurplesupport@gmail.com</a>
+  or open an issue on <a href="https://github.com/itsredbluepurple/RedBluePurple/issues">GitHub</a>.</p>
+</main>
+</body></html>

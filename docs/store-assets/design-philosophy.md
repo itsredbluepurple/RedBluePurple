@@ -1,0 +1,13 @@
+# Chromatic Verdict
+
+A design philosophy for the Red Blue Purple visual identity.
+
+**The movement.** Chromatic Verdict is the aesthetic of judgment rendered calm. It begins from a single conviction: a decision is a point of light in a dark field. Where other design languages shout their conclusions, this one lets three small suns — red, blue, violet — carry the entire argument. The near-black ground (#12141a) is not emptiness; it is the deliberating mind, and every glowing mark upon it is a verdict arrived at with care. The work must read as if a master typesetter and a color scientist spent long nights together calibrating exactly how much light a decision deserves.
+
+**Space and form.** Composition is asymmetric but settled: a heavy left anchor of language, a luminous counterweight of form. Circles are the only sacred geometry — never sharp stars, never arrows — because a verdict is round, complete, closed. Negative space does most of the speaking; elements sit far apart, each surrounded by enough darkness to be read alone. Nothing touches an edge casually. Margins are generous and deliberate, the product of painstaking attention rather than default padding.
+
+**Color and material.** Three hues only, at full conviction: signal red (#ff4d6d), clear blue (#4d9bff), soft violet (#b07bff) — the tricolor of alignment, and each is permitted a halo, a soft atmospheric bloom, as though shining through fog. Grays are borrowed from the interface itself (#cdd6ee, #9aa3b5) and used quietly for secondary language. White appears only where speech is essential. The dark ground may breathe — a barely-there gradient, one degree of warmth — but must never become decoration.
+
+**Scale and rhythm.** Typography moves in exactly three sizes per composition: one grand gesture in Space Grotesk, tightly tracked and confident; one supporting line in Inter, small and unhurried; one whisper in JetBrains Mono, uppercase, letterspaced wide like an instrument label. The monospace whisper is the movement's signature — it makes every artifact feel like a reading from a precise instrument. Rhythm comes from repetition of the dot: singly, in triads, in faint constellations, always in the canonical order red, blue, purple.
+
+**Craftsmanship.** Every glow is built in layers, never a single blur; every corner radius belongs to one consistent family; every alignment is optical, not mathematical. The finished artifact must look labored over — the product of deep expertise and countless refinements — such that a viewer who knows nothing of the product still senses that someone at the top of their field placed every point of light exactly where it must be.

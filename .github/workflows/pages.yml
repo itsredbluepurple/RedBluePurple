@@ -19,6 +19,7 @@ jobs:
         run: |
           mkdir -p _site/fonts
           cp public/about.js _site/about.js
+          cp docs/site/privacy.html _site/privacy.html
           cp public/fonts/*.woff2 _site/fonts/
           sed 's|url("/fonts/|url("./fonts/|g' public/fonts.css > _site/fonts.css
           python3 - <<'EOF'
